@@ -59,6 +59,7 @@ table tr:first-child th:last-child {
 table tr {
 	text-align: center;
 	padding-left:20px;
+
 }
 
 table td:first-child {
@@ -70,32 +71,46 @@ table td:first-child {
         overflow: hidden;
 }
 
+textarea { margin: 2px; resize: none; outline: none; }
 
 .score {
-        width: 20px;
+        width: 10px;
         overflow: hidden;
+        white-space: nowrap;
 }
 
 .comment {
-        width: 200px;
+        width: 450px;
+        overflow: hidden;
+}
+
+.actions {
+        width: 50px;
         overflow: hidden;
 }
 
 .link {
-        width: 200px;
+        width: 10px;
+        overflow: hidden;
+}
+
+.nb_days {
+        width: 10px;
+        overflow: hidden;
+}
+
+.nb_total_days {
+        width: 10px;
         overflow: hidden;
 }
 
 .message {
 	text-align: left !important;
 	padding-left:10px;   
-        width: 500px;
+        width: 450px;
         overflow: hidden;
         display: inline-block;
 }
-
-
-
 
 table td {
 	padding:2px;
@@ -141,3 +156,6 @@ body {
   display:none;
 }
 
+.test {
+  position:relative;
+}

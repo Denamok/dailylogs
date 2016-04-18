@@ -90,6 +90,7 @@ function get_max_year(){
     <title>Dailylogs</title>
     <link href="css/style.css" rel="stylesheet">
     <script src="js/jquery.min.js"></script>
+    <script src="js/autosize.min.js"></script>
     <script src="js/theme.js"></script>
 
 </head>
@@ -260,6 +261,7 @@ foreach ($categories as $category) {
       <th>Action</th>
     </tr>
     <?Php foreach ($logs as $log) {?>
+
        <tr>
        <td class="score"><?Php if ($log['score'] > 0) echo $log['score']; else echo 1;?></td>
        <td class="message"><?Php echo $log['message'];?></td>
@@ -267,12 +269,10 @@ foreach ($categories as $category) {
        <td class="nb_total_days"><?Php echo get_nb_total_days($log['logid'])->fetchColumn();?></td>
        <td class="first_date"><?Php echo get_first_date($log['logid'], $nb_days)->fetchColumn();?></td>
        <td class="comment">
-           <input class="comment" id="comment_<?Php echo $log['logid'] ?>" size="50" type="text" name="comment" autocomplete="off" value="<?Php echo $log['comment'];?>"/>
+           <textarea onclick="resize(<?Php echo $log['logid'] ?>)" class="comment" id="comment_<?Php echo $log['logid'] ?>" size="50" type="text" name="comment" autocomplete="off"><?Php echo htmlentities($log['comment']);?></textarea>
        </td>
-       <td class="link">
-           <input class="link" id="link_<?Php echo $log['logid'] ?>" size="20" type="text" name="link" autocomplete="off" value="<?Php echo $log['link'];?>"/>
-       </td>
-       <td>
+       <td class="link"><input type="hidden" id="link_<?Php echo $log['logid'] ?>" value="<?Php echo $log['link'] ?>"><?Php if ($log['link'] != '') {?><a target="_blank" href="<?Php echo $log['link'] ?>"><img src="images/link.png"/></a> <?Php }?></td>
+       <td class="actions">
          <select class="action" id="action_<?Php echo $log['logid'] ?>" onchange="doAction(<?Php echo $log['logid'] ?>, <?Php echo $log['status'] ?>);">
            <option value="nothing" selected="selected"></option>
            <?Php if ($log['status'] != 1){?> 
@@ -283,8 +283,9 @@ foreach ($categories as $category) {
            <?Php } ?> 
            <option value="update">Mettre à jour</option>
            <?Php if ($log['status'] != 0){?> 
-               <option value="new">Marquer comme nouveau</option>
+               <option value="new">Taguer nouveau</option>
            <?Php } ?> 
+           <option value="link">Modifier le lien</option>
            <option value="reinit">Réinitialiser</option>
          </select>
       </td>

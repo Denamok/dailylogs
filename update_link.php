@@ -9,20 +9,6 @@ if(!isset($_POST["logid"])){
  exit;
 }
 
-if(!isset($_POST["status"])){
- $response_array["status"] = "error"; 
- $response_array["msg"] = "Une erreur est survenue : pas de status";
- echo json_encode($response_array);
- exit;
-}
-
-if(!isset($_POST["comment"])){
- $response_array["status"] = "error"; 
- $response_array["msg"] = "Une erreur est survenue : pas de comment";
- echo json_encode($response_array);
- exit;
-}
-
 if(!isset($_POST["link"])){
  $response_array["status"] = "error"; 
  $response_array["msg"] = "Une erreur est survenue : pas de link";
@@ -31,11 +17,9 @@ if(!isset($_POST["link"])){
 }
 
 $logid=$_POST["logid"];
-$status=$_POST["status"];
-$comment=$dbo->quote($_POST["comment"]);
 $link=$dbo->quote($_POST["link"]);
 
-$sql=$dbo->prepare("UPDATE logs SET status = $status, comment = $comment, link = $link WHERE logid = $logid");
+$sql=$dbo->prepare("UPDATE logs SET link = $link WHERE logid = $logid");
 
 if($sql->execute()){
     $response_array["status"] = "success"; 

@@ -157,10 +157,10 @@ if(!isset($_GET["date"])){
      $date = $_GET["date"];
 }
 
-parse("dailycronerrorsmail.txt.1", "2016-04-14");
-parse("dailycronerrorsmail.txt.2", "2016-04-15");
-parse("dailycronerrorsmail.txt.3", "2016-04-16");
-parse("dailycronerrorsmail.txt.4", "2016-04-17");
-parse("dailycronerrorsmail.txt.5", "2016-04-18");
+//parse("dailycronerrorsmail.txt.1", "2016-04-14");
+//parse("dailycronerrorsmail.txt.2", "2016-04-15");
+//parse("dailycronerrorsmail.txt.3", "2016-04-16");
+//parse("dailycronerrorsmail.txt.4", "2016-04-17");
+//parse("dailycronerrorsmail.txt.5", "2016-04-18");
 
 ?>

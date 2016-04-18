@@ -9,6 +9,7 @@ function doAction(logid, status){
       case "update": update(logid, status, comment, link);break;
       case "new": update(logid, 0, comment, link);break;
       case "reinit": reinit(logid);break;
+      case "link": update_link(logid);break;
    }
 }
 
@@ -42,7 +43,29 @@ function reinit(logid){
    }
 }
 
+function update_link(logid){
+   link=prompt("Entrer un lien :","");
+   if (link != null){
+   $( "#loader" ).show();
+   $.post("update_link.php", {"logid" : logid, "link" : link}).success(function( data ) {
+        if(data.status == 'success'){
+           action=$( "#action_" + logid + " option:selected" ).val();
+           comment=$( "#comment_" + logid ).val();
+           link=$( "#link_" + logid ).val(); 
+           window.location.reload(false);
+        } else if(data.status == 'error'){
+            alert(data.msg);
+        }
+    });
+   }
+}
+
+function resize(logid){
+   autosize($( "#comment_" + logid ));
+}
 
 $(document).ready(function() {
     $('.action').prop('selectedIndex',0);
+
 });
+
