@@ -1,0 +1,23 @@
+<?Php
+
+// Logs server settings
+$logserver_name = "localhost";
+$logserver_username = "mok";
+$logserver_password = "mok";
+$log_filename = "/var/www/dailylogs/tests/dailycronerrorsmail.txt";
+
+// Database settings
+$dbhost_name = "localhost";
+$database = "dailylogs";
+$username = "mok";
+$password = "mok";
+
+// Do not edit below //
+try {
+   $dbo = new PDO('mysql:host=localhost;dbname='.$database, $username, $password);
+} catch (PDOException $e) {
+   print "Error!: " . $e->getMessage() . "<br/>";
+   die();
+}
+
+?> 

@@ -149,6 +149,17 @@ function parse($file, $date){
   } 
 }
 
+function download_last_logs(){
+   require "config.php"; 
+   $connection = ssh2_connect($logserver_name, 22);
+   ssh2_auth_password($connection, $logserver_username, $logserver_password);
+   ssh2_scp_recv($connection, $log_filename, "logs.txt");
+}
+
+function move_logs(){
+  rename("logs.txt", "old/logs-" . date('Y-m-d') . ".txt");
+}
+
 
 // Force date
 if(!isset($_GET["date"])){
@@ -157,10 +168,17 @@ if(!isset($_GET["date"])){
      $date = $_GET["date"];
 }
 
-//parse("dailycronerrorsmail.txt.1", "2016-04-14");
-//parse("dailycronerrorsmail.txt.2", "2016-04-15");
-//parse("dailycronerrorsmail.txt.3", "2016-04-16");
-//parse("dailycronerrorsmail.txt.4", "2016-04-17");
-//parse("dailycronerrorsmail.txt.5", "2016-04-18");
+download_last_logs();
+parse("logs.txt", $date);
+move_logs();
+
+
+// TESTS
+//parse("tests/dailycronerrorsmail.txt.1", "2016-04-14");
+//parse("tests/dailycronerrorsmail.txt.2", "2016-04-15");
+//parse("tests/dailycronerrorsmail.txt.3", "2016-04-16");
+//parse("tests/dailycronerrorsmail.txt.4", "2016-04-17");
+//parse("tests/dailycronerrorsmail.txt.5", "2016-04-18");
+//parse("tests/dailycronerrorsmail.txt.6", "2016-04-19");
 
 ?>
