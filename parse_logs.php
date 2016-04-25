@@ -69,7 +69,7 @@ function prepare_log($date_to_insert){
             // Log already inserted today in database : doing nothing
             // print_log("NOTHING - ");
             $nb_nothing++;
-          } else if ($log["diff"] == 1){
+          } else if ($log["diff"] < 15){
             // Log already detected yesterday
             $status = $log["status"];
             $comment = $log["comment"];
